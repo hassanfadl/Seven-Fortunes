@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+<!--    <record model="ir.ui.view" id="view_employee_form_inherit">-->
+<!--        <field name="name">hr.employee.form</field>-->
+<!--        <field name="model">hr.employee</field>-->
+<!--        <field name="inherit_id" ref="hr.view_employee_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='visa_expire']" position="after">-->
+<!--                <field name="residence_issuance_date"/>-->
+<!--                <field name="residence_end_date"/>-->
+<!--                <field name="residence_number"/>-->
+<!--                <field name="professional_license_number"/>-->
+<!--                <field name="border_number"/>-->
+<!--                <field name="job_in_office"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    </data>
+</odoo>

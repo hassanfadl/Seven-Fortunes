@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record model="ir.ui.view" id="hr_contract_inherit_form_view_insurance">
+        <field name="name">hr.contract.form.insurance</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[2]" position="after">
+                <page name="insurance_info" string="Insurance">
+                    <group string="Social Insurance" name="social_insurance">
+                        <group name="social_insurance_date">
+                            <field name="insurance_date"/>
+                            <field name="insurance_salary"/>
+                        </group>
+                        <group name="social_insurance_amount">
+                            <field name="employee_percentage"/>
+                            <field name="company_percentage"/>
+                            <field name="employee_amount"
+                                   attrs="{'invisible':[('is_saudi','=', True)]}"/>
+                            <field name="company_amount"
+                                   attrs="{'invisible':[('is_saudi','=', True)]}"/>
+                            <field name="employee_gosi"
+                                   attrs="{'invisible':[('is_saudi','=', False)]}"/>
+                            <field name="company_gosi"
+                                   attrs="{'invisible':[('is_saudi','=', False)]}"/>
+                        </group>
+                    </group>
+                    <group string="Medical Insurance" name="medical_insurance">
+                        <group name="medical_date">
+                            <field name="medical_date"/>
+                        </group>
+                        <group name="medical_amount">
+                            <field name="medical_insurance_employee"/>
+                            <field name="medical_insurance_family_check"/>
+                            <field name="medical_insurance_family"
+                                   attrs="{'invisible':[('medical_insurance_family_check','=',False)]}"/>
+                        </group>
+                    </group>
+                </page>
+                <page name="allowances_and_deductions" string="Allowances And Deductions">
+                    <group string="Allowances" name="allowances">
+                        <group>
+                            <field name="house_allowances"/>
+                            <field name="transport_allowances"/>
+                            <field name="adding_allowances"/>
+
+                        </group>
+                        <group>
+                            <field name="other_allowances"/>
+                        </group>
+                    </group>
+                    <group string="Deductions" name="deductions">
+                        <group name="medical_date">
+                            <field name="general_deductions"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//group[@name='duration_group']" position="inside">
+                <field name="total_yearly_leave_days"/>
+                <field name="employee_type"/>
+                <field name="is_saudi"/>
+
+            </xpath>
+            <xpath expr='//group[@name="salary_and_advantages"]' position='inside'>
+                <field name="new_wage" invisible="0" string="Comprehensive Wage"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
