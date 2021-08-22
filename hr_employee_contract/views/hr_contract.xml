@@ -44,7 +44,7 @@
                             <field name="transport_allowances"/>
                             <field name="adding_allowances"/>
 							<field name="meal_allowance" />
-							<field name="transportation_allowance" />
+							<field name="transportation_allowance" invisible="1" />
 							<field name="basic_salary" />
                         </group>
                         <group>
@@ -60,9 +60,9 @@
 				
             </xpath>
             <xpath expr="//group[@name='duration_group']" position="inside">
-                <field name="total_yearly_leave_days"/>
-                <field name="employee_type"/>
-                <field name="is_saudi"/>
+                <field name="total_yearly_leave_days" invisible="1"/>
+                <field name="employee_type" invisible="1" />
+                <field name="is_saudi" invisible="1"/>
 				
 				
 
