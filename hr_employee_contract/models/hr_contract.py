@@ -14,7 +14,10 @@ class HrContract(models.Model):
 
     employee_type = fields.Selection(string="", selection=[('doctors_administrators', 'Doctors & Administrators'),
                                                            ('Workers', 'Workers'), ], required=False, )
-
+    meal_allowance = fields.Float(string="Meal Allowance")
+    transportation_allowance = fields.Float(string="Transportation Allowance")
+    basic_salary = fields.Float(string="Basic Salary")
+    
     @api.onchange('employee_type')
     def get_total_yearly_leave_days(self):
         if self.employee_type == 'doctors_administrators':
