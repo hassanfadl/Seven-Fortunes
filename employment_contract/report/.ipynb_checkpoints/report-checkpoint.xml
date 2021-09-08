@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="report_employee_contract_pdf"
+                model="hr.contract"
+                string="employee contract"
+                report_type="qweb-pdf"
+                name="employment_contract.report_employee_contract_pdf"
+                file="employment_contract.report_payslip_salary_rules_pdf"
+                attachment_use="False"
+                print_report_name="'employee contract'"
+        />
+    <template id="report_employee_contract_pdf_doc">
+    <t t-set="docs" t-value="docs.with_context(lang=lang)" />
+           <t t-call="web.external_layout" style="direction: rtl;">
+        <div style='display: flex;'>
+              <style>
+                    .bold {
+                        font-weight: bold;
+                    }
+                </style>
+            <h3 align="center">عقد عمل محدد المدة</h3>
+            <div>
+                <p align="right">:-إنھ في یوم/ <span t-esc="docs.get_day()"/> الموافق/<span t-esc="docs.date_start"/> حرر بین كلاً من</p>
+                <p align="right"><span class="bold">اولا:</span> الشركة / <span t-esc="docs.company_id.name"/> و مقرها <span t-esc="docs.get_company_address()"/> ویمثلھا في ھذا العقد السید <span t-esc="docs.employee_id.parent_id.name"/> </p>
+                <p align="right"><span class="bold">ثانيا:</span> السید/ <span t-esc="docs.employee_id.name"/>  المقيم <span t-esc="docs.address"/> رقم القومي <span t-esc="docs.id_number"/> </p>
+                    <p align="right">:أقر الطرفان بأھلیتھما القانونیة للتصرف والتعاقد واتفقوا على ما یلي</p>
+                    <p align="right"><span class="bold">اولا:</span> یلتزم الطرف الثاني بموجب ھذا العقد بالعمل لدى الطرف الأول بوظیف 
+                        <span t-esc="docs.job_id.name"/> بالشركة أو
+                        بأي مكان تابع لھا ،على أن تكون الثلاثة أشھر الأولى فترة اختبار تحت التجربة. وإذا ثبت خلال ھذه الفترة عدم صلاحیة
+                        الطرف الثاني للعمل لدى الطرف الأول، انقضت علاقة العمل وانفسخ العقد دون حاجة إلى إنذار مسبق، وبدون مكافأة أو
+                        تعویض ولیس للطرف الثاني في ھذه الحالة الاعتراض على قرار الطرف الأول بھذا الشأن</p>
+                    <p align="right"><span class="bold">ثانيا:</span> یحق للطرف الأول القیام بتكالیف الطرف الثاني بأداء أي عمل أخر بشرط ألا یتعارض مع
+                        قدراتھ وإمكانیاتھ</p>
+                    <p align="right"><span class="bold">ثالثا:</span> مدة ھذا العقد <span t-esc="docs.get_contract_period()"/>
+                        تبدأ من <span t-esc="docs.date_start"/> وتنتهي في   <span t-esc="docs.date_end"/> ، غير قابلة للتجديد أو يمكن تجديدها بمدد أخرى عقب اتفاق كلاً من الطرفين</p>
+                    <p align="right"><span class="bold">رابعا:</span> یحدد أجر الطرف الثاني نظیر قیامھ بالأعمال المسندة إلیھ من قبل الطرف الأول براتب
+                        شھري إجمالي وقدره <span t-esc="docs.wage"/>
+                        جنیھ فقط (<span t-esc="docs.wage_in_words()"/>) یتم دفعھ في نھایة كل شھر ویتضمن أعلى نسبة من إعانة غلاء المعیشة
+                        المقررة قانوناً، كما یشتمل على كافة البدلات المستحقة بسبب طبیعة أو مكان العمل</p>
+                    <p align="right"><span class="bold">خامسا:</span> یستحق الطرف الثاني إجازة سنویة مدفوعة الأجر مقدراھا 21 یوماً یقوم الطرف الأول
+                        بتحدید موعدھا بما یتناسب مع طبیعة العمل</p>
+                    <p align="right"><span class="bold">سادسا:</span> یلتزم الطرف الثاني بأداء العمل، الذي یسند إلیھ من قبل الطرف الأول تبعا لتوجیھھ
+                        وإشرافھ، وأن یبذل في تأدیتھ أقصى جھد وأن یمتثل لأوامر الطرف الطرف الثاني الخاصة بتنفیذ العمل المتفق علیھ، وأن
+                        یحرص على أدوات العمل الموضوعة تحت تصرفھ وأن یحافظ علیھا ویتخذ ما یلزم لحفظھا وسلامتھا، وأن یحتفظ بأسرار العمل،
+                        التي تم التعرف والاطلاع علیھا عقب استلامھ للعمل</p>
+                    <p align="right"><span class="bold">سابعا:</span> لا يجوز للطرف الثاني العمل لدى الغير بأجر أو بدون أجر، إلا بموافقة الطرف الأول الكتابية على ذلك ، ولا يجوز للطرف الثاني طلب انهاء عملة الا قبل انتهاء مدة العقد بشهرين علي الاقل والا يلتزم  بكامل التعويض  عن ذلك</p>
+                    <p align="right"><span class="bold">ثامنا:</span> یحق للطرف الأول فصل الطرف الثاني بدون سابق إنذار أو تعویض، إذا قام بارتكاب أي
+                        خطأ أدى إلى خسارة مادیة جسیمة، أو أنھ لن یراعي التعلیمات الصادرة لھ، أو أنھ لم یقوم بتأدیة التزاماتھ الجوھریة أو
+                        أنھ قام بإفشاء أیاً من أسرار العمل، أو أنھ تغیب عن العمل لمدة عشرة أیام متواصلة أو عشرین یوم متقطعة خلال السنة
+                        الواحدة بدون سبب مشروع، أو بسبب الحكم علیھ في أیاً من القضایا المخلة بالشرف</p>
+                    <p align="right"><span class="bold">تاسعا:</span> یقر الطرف الثاني أن أي إخطار یرسل إلیھ على عنوانھ المذكور في ھذا العقد، یعتبر
+                        إخطار صحیح ویتعھد بإخطار الطرف الأول بأي تعدیل في ھذا العنوان خلال أسبوع من تاریخ حدوثھ.</p>
+                    <p align="right"><span class="bold">عاشرا:</span> في حالة إنھاء عمل الطرف الثاني یتعھد بأن یسلم للطرف الأول كل ما في عھدتھ فور
+                        انتھاء خدمتھ، ولا تبرأ ذمتھ للشركة إلا بإخلاء الطرف</p>
+                    <p align="right"><span class="bold">اخيرا:</span> حرر ھذا العقد من نسختین بید كل طرف نسخة لیتم العمل بموجبھا</p>
+                <div class='row'>
+                    <div class='col-6'><p>........................... توقیع الطرف الثاني</p></div>
+                    <div class='col-6'><p>  ........................... توقیع  الطرف الاول</p></div>
+                </div>
+                </div>
+            </div>
+            </t>
+    </template>
+    
+    <template id="report_employee_contract_pdf">
+        <t t-set="full_width" t-value="True"/>
+        <t t-call="web.html_container">
+            <t t-set="lang" t-value="user.partner_id.lang"/>
+            <t t-call="employment_contract.report_employee_contract_pdf_doc" t-lang="lang"/>
+        </t>
+    </template>
+    </data>
+</odoo>

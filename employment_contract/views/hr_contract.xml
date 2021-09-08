@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo> 
+    <data>
+    <record id="employment_contract_contract_changes" model="ir.ui.view" >
+        <field name="name">employment_contract.contract_changes</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//field[@name="employee_id"]' position='after'>
+                        <field name="address"/>
+                        <field name="id_number"/>
+            </xpath>
+        </field>
+    </record>
+
+    </data>
+</odoo>
