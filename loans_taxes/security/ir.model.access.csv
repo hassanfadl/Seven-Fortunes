@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_loans_config,loans config,model_loans_config,,1,1,1,1
+access_loans_creation,loans creation,model_loans_creation,,1,1,1,1
+access_loans_details,loans details,model_loans_details,,1,1,1,1
+access_hr_leave_portal,access.hr.leave.portal,hr_holidays.model_hr_leave,base.group_portal,1,1,1,0
+access_hr_leave_type_portal,access.hr.leave.type.portal,hr_holidays.model_hr_leave_type,base.group_portal,1,0,0,0
+access_hr_leave_allocation_portal,access.hr.leave.allocation.portal,hr_holidays.model_hr_leave_allocation,base.group_portal,1,0,0,0

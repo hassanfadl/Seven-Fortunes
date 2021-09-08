@@ -1,0 +1,74 @@
+<odoo>
+    <data>
+        <!-- QWeb Reports -->
+        <!-- NAME & FILE_NAME should be the same -->
+        <report
+                id="loans_deatails_report"
+                model="loans.creation"
+                report_type="qweb-pdf"
+                string="Loans Details"
+                name="loans_taxes.loans_report"
+                file="loans_taxes.loans_report"
+        />
+        <template id="loans_report">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <!-- <t t-call="report.external_layout"> -->
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <div class="oe_structure">
+                                <div id="loans details">
+                                    <div t-if="doc.name" class="col-3 bm-2">
+                                        <strong>Name :</strong>
+                                        <span t-field="doc.name" class="m-0"/>
+                                    </div>
+                                    <div t-if="doc.loans_amount" class="col-4 bm-2">
+                                        <strong>Loans Amount :</strong>
+                                        <span t-field="doc.loans_amount" class="m-0"/>
+                                    </div>
+                                    <div t-if="doc.start_dateOf_loans" class="col-4 bm-2">
+                                        <strong>Loans Start Date :</strong>
+                                        <span t-field="doc.start_dateOf_loans" class="m-0"/>
+                                    </div>
+                                    <div t-if="doc.loans_end_date" class="col-5 bm-2">
+                                        <strong>Loans End Date :</strong>
+                                        <span t-field="doc.loans_end_date" class="m-0"/>
+                                    </div>
+                                </div>
+                                <table class="table table-sm o_main_table">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left">
+                                                <strong>Payoff Dates</strong>
+                                            </th>
+                                            <th class="text-center">
+                                                <strong>Payoff Amount</strong>
+                                            </th>
+                                            <th class="text-right">
+                                                <strong>Loans Status</strong>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="doc.loans_details" t-as="line">
+                                            <td class="text-left">
+                                                <span t-field="line.monthly_payOff_dates"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-field="line.monthly_payOff_amount"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="line.loans_status"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

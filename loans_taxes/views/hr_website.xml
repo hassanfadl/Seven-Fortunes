@@ -1,0 +1,183 @@
+<odoo>
+    <data>
+
+        <template id="hr_portal_requests" name="HR Portal" inherit_id="portal.portal_my_home">
+            <xpath expr="//h3" position="after">
+                <div class="row">
+                    <a href="/my/hr_timeoff">Request a time-off</a>
+                </div>
+                <div class="row">
+                    <a href="/my/hr_loan">Request a loan</a>
+                </div>
+                <div class="row">
+                    <a href="/my/hr_my_timeoff">My time-off</a>
+                </div>
+                <div class="row">
+                    <a href="/my/hr_my_loans">My loans</a>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="portal_layout" name="Portal timeoff" inherit_id="portal.portal_breadcrumbs" priority="100">
+            <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+                <li t-if="page_name == 'timeoff'" t-attf-class="breadcrumb-item #{'active' if not timeoff else ''}">
+                    <t>Time-off Request</t>
+                </li>
+                <li t-if="page_name == 'mytimeoff'" t-attf-class="breadcrumb-item #{'active' if not mytimeoff else ''}">
+                    <t>My Time-off</t>
+                </li>
+                <li t-if="page_name == 'loans'" t-attf-class="breadcrumb-item #{'active' if not loans else ''}">
+                    <t>Loan Request</t>
+                </li>
+                <li t-if="page_name == 'myloans'" t-attf-class="breadcrumb-item #{'active' if not myloans else ''}">
+                    <t>My Loans</t>
+                </li>
+            </xpath>
+        </template>
+
+        <template id="portal_hr_timeoff">
+            <t t-call="portal.portal_layout">
+                <t t-set="additional_title">Time-off Request</t>
+                <form action="/my/hr_timeoff" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="row o_portal_details">
+                        <div class="col-lg-8">
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <div t-if="error_message" class="alert alert-danger" role="alert">
+                                        <t t-foreach="error_message" t-as="err">
+                                            <t t-esc="err"/>
+                                            <br />
+                                        </t>
+                                    </div>
+                                </div>
+
+
+                                <div t-attf-class="form-group #{error.get('type_id') and 'o_has_error' or ''} col-xl-12">
+                                    <label class="col-form-label" for="type_id">Request Type</label>
+                                    <select name="type_id" t-attf-class="form-control #{error.get('type_id') and 'is-invalid' or ''}">
+                                        <option value="">Type...</option>
+                                        <t t-foreach="rtypes or []" t-as="rtype">
+                                            <option t-att-value="rtype.id">
+                                                <t t-esc="rtype.name" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                                <div class="clearfix" />
+
+                                <div t-attf-class="form-group #{error.get('rfrom') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="rfrom">From</label>
+                                    <input type="date" name="rfrom" t-attf-class="form-control #{error.get('rfrom') and 'is-invalid' or ''}" t-att-value="rfrom" />
+                                </div>
+
+                                <div t-attf-class="form-group #{error.get('rto') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="rto">TO</label>
+                                    <input type="date" name="rto" t-attf-class="form-control #{error.get('rto') and 'is-invalid' or ''}" t-att-value="rto" />
+                                </div>
+                                <div class="clearfix" />
+
+                                <div t-attf-class="form-group #{error.get('description') and 'o_has_error' or ''} col-xl-12">
+                                    <label class="col-form-label label-optional" for="rto">Description</label>
+                                    <textarea name="description" rows="4" t-attf-class="form-control #{error.get('description') and 'is-invalid' or ''}" t-att-value="description" />
+                                </div>
+
+                                <div class="clearfix" />
+
+                            </div>
+                            <div class="clearfix">
+                                <button type="submit" class="btn btn-primary float-right mb32 ">
+                                Confirm
+                                    <span class="fa fa-long-arrow-right" />
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </t>
+        </template>
+
+
+        <template id="portal_hr_loan">
+            <t t-call="portal.portal_layout">
+                <t t-set="additional_title">Loan Request</t>
+                <form action="/my/hr_loan" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="row o_portal_details">
+                        <div class="col-lg-8">
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <div t-if="error_message" class="alert alert-danger" role="alert">
+                                        <t t-foreach="error_message" t-as="err">
+                                            <t t-esc="err"/>
+                                            <br />
+                                        </t>
+                                    </div>
+                                </div>
+
+
+
+                                <div t-attf-class="form-group #{error.get('amount') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="amount">Loan Amount</label>
+                                    <input type="number" step="0.01" min="0" name="amount" t-attf-class="form-control #{error.get('amount') and 'is-invalid' or ''}" t-att-value="amount" />
+                                </div>
+
+                            </div>
+                            <div class="clearfix">
+                                <button type="submit" class="btn btn-primary float-right mb32 ">
+                                Confirm
+                                    <span class="fa fa-long-arrow-right" />
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </t>
+        </template>
+
+        <template id="portal_my_timeoff">
+            <t t-call="portal.portal_layout">
+                <t t-set="additional_title">My Time-off Requests</t>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6" t-foreach="leaves" t-as="leave">
+                        <div t-attf-class="card #{'bg-success' if leave.get('status') == 'validate' else ''} #{'bg-danger' if leave.get('status') == 'refuse' else ''} #{'bg-secondary' if not leave.get('status') else ''}" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <span t-esc="leave['name']"></span>
+                                </h5>
+                                <p class="card-text">Duraion: <span t-esc="leave['duration']"></span>
+                                    <br />
+Description: <span t-esc="leave['description']"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="portal_my_loans">
+            <t t-call="portal.portal_layout">
+                <t t-set="additional_title">My Loans</t>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6" t-foreach="laons" t-as="loan">
+                        <div t-attf-class="card #{'bg-success' if loan.get('status') == 'approved' else ''} #{'bg-danger' if loan.get('cancel') == 'refuse' else ''} #{'bg-secondary' if not loan.get('status') else ''}" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    Amount: <span t-esc="loan['amount']"></span>
+                                </h5>
+                                <p class="card-text">Starting Date: <span t-esc="loan['starting_date']"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>
